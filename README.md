@@ -91,4 +91,90 @@ pub const POLLS: Map<String, Poll> = Map::new("polls");
 - `use cosmwasm_std::Addr`:
   - Làm việc với Address trên mạng
 - `cw_storage_plus`: các kiểu dữ liệu để lưu trữ state
+- các `String` truyền vào khi khởi tạo các biến trạng thái (`Item`, `Map`,...) là các key định danh trong `blockchain storage` để truy xuất dữ liệu
+
+| **Cấu trúc** | **Chuỗi truyền vào `::new()` là gì?** | **Ý nghĩa** |
+|-------------|---------------------------------|----------|
+| `Item<T>::new("key")` | `"key"`  | Key duy nhất trong storage. |
+| `Map<K, V>::new("prefix")` | `"prefix"` | Tiền tố để tạo key động. |
+| `Bucket<K, V>::new("namespace")` | `"namespace"` | Giúp phân vùng dữ liệu. |
+| `SnapshotMap<K, V>::new("key", "checkpoints", "changelog")` | `"key"`, `"checkpoints"`, `"changelog"` | Lưu dữ liệu có thể truy vấn theo block height. |
+
+📌 Các String truyền vào ::new() trong cw-storage-plus là gì?
+
+Khi bạn gọi ::new("some_string") trong Item<T>, Map<K, V>, Bucket<K, V>, v.v., chuỗi "some_string" chính là key định danh trong blockchain storage.
+
+1️⃣ **Item<T>::new("key")**
+
+🔹 Ví dụ:
+
+```rust
+pub const CONFIG: Item<Config> = Item::new("config");
+```
+
+`"config"` là tên key trong storage.
+
+Mọi dữ liệu của `CONFIG` sẽ được lưu vào key `"config"`.
+
+Khi truy xuất dữ liệu, contract sẽ tìm trong storage với key "config".
+
+📌 **Tóm lại**:
+
+Mỗi Item<T> có một key duy nhất, giúp truy xuất dễ dàng.
+
+2️⃣ **Map<K, V>::new("prefix")**
+
+🔹 Ví dụ:
+```rust
+pub const POLLS: Map<String, Poll> = Map::new("polls");
+```
+
+`"polls"` là prefix (tiền tố) trong storage.
+
+Mọi dữ liệu lưu trong POLLS sẽ có key dạng:
+
+`"polls" + poll_id`
+
+Nếu `poll_id = "123"`, thì key trong storage sẽ là `"polls123"`.
+
+📌 **Tóm lại:**
+
+`Map<K, V>` không có một key cố định, mà nó là một prefix để tạo ra nhiều key khác nhau.
+
+3️⃣ **Bucket<K, V>::new("namespace")**
+
+🔹 Ví dụ:
+```rust
+pub const USER_DATA: Bucket<u128> = Bucket::new("user_data");
+```
+
+`"user_data"` là namespace.
+
+Tương tự `Map`, nhưng dữ liệu sẽ được lưu với namespace `"user_data"`.
+
+📌 **Tóm lại:**
+
+`Bucket<K, V>` giúp tránh trùng key khi có nhiều nhóm dữ liệu khác nhau.
+
+4️⃣ **SnapshotMap<K, V>::new("key", "checkpoints", "changelog")**
+
+🔹 Ví dụ:
+```rust
+pub const STAKE_BALANCES: SnapshotMap<&Addr, u128> = SnapshotMap::new(
+    "stake_balances",
+    "stake_balances__checkpoints",
+    "stake_balances__changelog",
+);
+```
+
+`"stake_balances"`: Prefix chính của dữ liệu staking.
+
+`"stake_balances__checkpoints"`: Lưu checkpoint (dữ liệu theo block height).
+
+`"stake_balances__changelog"`: Lưu lịch sử thay đổi.
+
+📌 **Tóm lại:**
+
+SnapshotMap<K, V> giúp lưu dữ liệu theo thời gian để có thể truy xuất lịch sử.
+
 
