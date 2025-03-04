@@ -45,3 +45,28 @@ cw-starter/ # Root
   - `examples`: dùng để tạo ra các file json (kiểu như abi) -> là các "bản hướng dẫn" để tương tác với contract.
   - `schema`: chứa các file json (abi)
   - `target`: chứa các file build artifact để thao tác trên blockchain
+## **Giải thích code trong src**
+- state.rs:
+```solidity
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
+
+use cosmwasm_std::Addr;
+use cw_storage_plus::Item;
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct State {
+    pub count: i32,
+    pub owner: Addr,
+}
+
+pub const STATE: Item<State> = Item::new("state");
+```
+ - `use schemars::JsonSchema`:
+   
+   🔹 `JsonSchema` là một derive `macro` giúp tạo `JSON Schema` tự động từ các `struct` và `enum` trong `Rust`.
+   
+   🔹 Nó được sử dụng phổ biến trong `CosmWasm` để tạo `JSON Schema` cho messages và state.
+   
+   🔹 `JsonSchema` làm việc với `serde`, giúp đảm bảo rằng dữ liệu có thể được `serialize` và `deserialize` thành JSON.
+
