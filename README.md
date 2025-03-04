@@ -56,17 +56,30 @@ use serde::{Deserialize, Serialize};
 // Deserialize: chuyển đổi JSON -> struct/enum
 
 use cosmwasm_std::Addr; // làm việc với Cosmos address
-use cw_storage_plus::Item; // Lưu trữ giá trị trên chain
+use cw_storage_plus::{Item, Map}; // Lưu trữ giá trị trên chain
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)] // marco để impl trait cho struct
-pub struct State {
+pub struct Config {
     // cấu trúc định nghĩa các biến state 
-    pub count: i32,
-    pub owner: Addr,
+    pub admin: Addr, // Admin address
 }
 
-pub const STATE: Item<State> = Item::new("state"); // lưu trữ state
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Poll {//Lưu thông tin Poll
+    pub creator: Addr,
+    pub question: String,
+    pub options: Vec<(String, u64)>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Ballot {// Lưu thông tin vote của user
+    pub option: String,
+}
+
+pub const CONFIG: Item<Config> = Item::new("config"); // lưu trữ state
 // định danh truy cập vào storage
+
+pub const POLLS: Map<String, Poll> = Map::new("polls");
 ```
  - `use schemars::JsonSchema`:
    
@@ -77,5 +90,5 @@ pub const STATE: Item<State> = Item::new("state"); // lưu trữ state
    🔹 `JsonSchema` làm việc với `serde`, giúp đảm bảo rằng dữ liệu có thể được `serialize` và `deserialize` thành JSON.
 - `use cosmwasm_std::Addr`:
   - Làm việc với Address trên mạng
-- `cw_storage_plus::Item`: Lưu trữ biến trong storage
+- `cw_storage_plus`: Lưu trữ biến trong storage
 
