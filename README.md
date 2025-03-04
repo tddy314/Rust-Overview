@@ -47,20 +47,26 @@ cw-starter/ # Root
   - `target`: chứa các file build artifact để thao tác trên blockchain
 ## **Giải thích code trong src**
 - state.rs:
-```solidity
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
+```rust
+use schemars::JsonSchema; //là một derive macro
+                          // Giúp tự động tạo JSON schema từ các struct và enum 
+                          // Làm việc với crate serde
+use serde::{Deserialize, Serialize}; 
+// Serialize : Chuyển đổi struct/enum -> JSON
+// Deserialize: chuyển đổi JSON -> struct/enum
 
-use cosmwasm_std::Addr;
-use cw_storage_plus::Item;
+use cosmwasm_std::Addr; // làm việc với Cosmos address
+use cw_storage_plus::Item; // Lưu trữ giá trị trên chain
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)] // marco để impl trait cho struct
 pub struct State {
+    // cấu trúc định nghĩa các biến state 
     pub count: i32,
     pub owner: Addr,
 }
 
-pub const STATE: Item<State> = Item::new("state");
+pub const STATE: Item<State> = Item::new("state"); // lưu trữ state
+// định danh truy cập vào storage
 ```
  - `use schemars::JsonSchema`:
    
@@ -69,4 +75,7 @@ pub const STATE: Item<State> = Item::new("state");
    🔹 Nó được sử dụng phổ biến trong `CosmWasm` để tạo `JSON Schema` cho messages và state.
    
    🔹 `JsonSchema` làm việc với `serde`, giúp đảm bảo rằng dữ liệu có thể được `serialize` và `deserialize` thành JSON.
+- `use cosmwasm_std::Addr`:
+  - Làm việc với Address trên mạng
+- `cw_storage_plus::Item`: Lưu trữ biến trong storage
 
