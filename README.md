@@ -90,5 +90,5 @@ pub const POLLS: Map<String, Poll> = Map::new("polls");
    🔹 `JsonSchema` làm việc với `serde`, giúp đảm bảo rằng dữ liệu có thể được `serialize` và `deserialize` thành JSON.
 - `use cosmwasm_std::Addr`:
   - Làm việc với Address trên mạng
-- `cw_storage_plus`: Lưu trữ biến trong storage
+- `cw_storage_plus`: các kiểu dữ liệu để lưu trữ state
 
