@@ -14,6 +14,9 @@
 - `cargo build`: compile và tạo ra file thực thi nhưng không run
 - `cargo check`: chỉ compile
 - `cargo run`: compile + tạo file thực thi + run
+- This will generate new JSON files, for our config, poll and ballot `cargo schema`
+- Still 0 tests but should pass `cargo test`
+- Will generate the wasm under target `cargo wasm`
 
   ## **Smart Contract on Cosmos**
   - Sử dụng template `cosmwasm`
