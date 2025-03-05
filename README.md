@@ -1,5 +1,7 @@
 # Rust-Overview
 
+**Personal opinion**: viết contract cosmwasm cũng na ná viết updgradable contract theo Proxy pattern trong solidity, sẽ có mọt file chính quản lý khởi tạo, gọi hàm, storage,... rồi gọi logic của các logic contract.
+
 **`NOTE`**: `cargo` là trình quản lý gói, thư viện (có thể em tương đương như `npm` hợp `npx`)
 
 ## **Basic command**
