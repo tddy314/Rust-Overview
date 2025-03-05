@@ -178,3 +178,30 @@ pub const STAKE_BALANCES: SnapshotMap<&Addr, u128> = SnapshotMap::new(
 SnapshotMap<K, V> giúp lưu dữ liệu theo thời gian để có thể truy xuất lịch sử.
 
 
+## Module viết test 
+```rust
+mod tests {
+    use cosmwasm_std::attr;
+    //module attr, helper mod
+    //tạo và sử dụng các thuộc tính(attributes)
+    // e.g. : ("action", "instantiate")
+
+    use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
+    //các hàm giả lập (mock function to mock an envirionment, message info, dependencies) 
+    //mock_dependencies tạo ra một đối tượng giả lập cho các Deps trong môi trường CosmWasm. Nó bao gồm các phần như bộ lưu trữ (storage), API, và querier mà hợp đồng sẽ sử dụng. Điều này giúp bạn kiểm tra các hành động như ghi dữ liệu vào bộ lưu trữ mà không cần một blockchain thật.
+    //mock_env tạo ra một đối tượng giả lập cho môi trường (Env) mà hợp đồng thông minh chạy trong đó. Nó bao gồm các thông tin như thời gian, địa chỉ của người gọi, và các yếu tố khác liên quan đến môi trường thực thi.
+    //mock_info giúp tạo ra thông tin giả lập cho MessageInfo, bao gồm địa chỉ người gọi và các tiền tệ gửi kèm (nếu có). Đây là đối tượng chứa các thông tin về người gửi giao dịch
+
+    use crate::contract::instantiate; // hàm init của contract
+    use crate::msg::InstantiateMsg; // 
+
+
+    //các account giả lập
+    pub const ADDR1: &str = "addr1";
+    pub const ADDR2: &str = "addr2";
+
+}
+
+```
+
+
