@@ -42,6 +42,8 @@ cw-starter/ # Root
 │   └── state.rs # Where we define any state variables
 └── target/ # Where unoptimised WASM files are outputted
 ```
+
+**Note**: Khi compile nó sẽ compile lib.rs rồi từ đó compile khác mod được import bên trong
 - **Command for generating CW-template**
   - Lastest Ver : `cargo generate --git https://github.com/CosmWasm/cw-template.git --name <PROJECT_NAME>`
   - Older Ver   : `cargo generate --git https://github.com/CosmWasm/cw-template.git --name cw-starter -d minimal=true`
