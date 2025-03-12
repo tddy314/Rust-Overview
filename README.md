@@ -253,9 +253,10 @@ docker run --rm -v "${PWD}:/code" `
 
 ```
 //Optimize 1 contracts
-docker run --rm -v ${PWD}:/code `
-  --mount type=volume,source="${PWD##*/}_cache",target=/code/target `
+docker run --rm -v "D:/desktop/Security_Research/Cosmos/Rust Learning/rustlings/cw-starter:/code" `
+  --mount type=volume,source="cw-starter_cache",target=/code/target `
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
   cosmwasm/rust-optimizer:0.16.0
+
 ```
 
