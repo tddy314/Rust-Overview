@@ -243,10 +243,19 @@ cw-starter/
 Lenh toi uu wasm
 
 ```
+//Optimize nhieu contract
 docker run --rm -v "${PWD}:/code" `
   --mount type=volume,source="$(Get-Item -Path ${PWD} | Select-Object -ExpandProperty Name)_cache",target=/code/target `
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
   cosmwasm/workspace-optimizer:0.14.0
 
+```
+
+```
+//Optimize 1 contracts
+docker run --rm -v ${PWD}:/code `
+  --mount type=volume,source="${PWD##*/}_cache",target=/code/target `
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
+  cosmwasm/rust-optimizer:0.16.0
 ```
 
