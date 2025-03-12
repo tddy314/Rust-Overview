@@ -214,6 +214,9 @@ mod tests {
 }
 
 ```
+
+cau truc chuan
+cargo.toml o root phai khai bao workspace
 ```bash
 cw-starter/
 ├── Cargo.lock         # File lock cho dependencies (tự động tạo)
@@ -233,6 +236,17 @@ cw-starter/
 ├── tests/             # (Tùy chọn) Test tổng hợp cho tất cả contracts
 ├── examples/          # (Tùy chọn) Chứa mẫu sử dụng contract
 └── artifacts/         # Chứa file .wasm đã build và tối ưu
+
+```
+
+
+Lenh toi uu wasm
+
+```
+docker run --rm -v "${PWD}:/code" `
+  --mount type=volume,source="$(Get-Item -Path ${PWD} | Select-Object -ExpandProperty Name)_cache",target=/code/target `
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
+  cosmwasm/workspace-optimizer:0.14.0
 
 ```
 
