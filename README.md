@@ -207,8 +207,32 @@ mod tests {
     pub const ADDR1: &str = "addr1";
     pub const ADDR2: &str = "addr2";
 
+
+
+
+
 }
 
 ```
+```bash
+cw-starter/
+├── Cargo.lock         # File lock cho dependencies (tự động tạo)
+├── Cargo.toml         # Định nghĩa workspace và dependencies chung
+├── contracts/         # Chứa các smart contracts
+│   ├── my_contract/   # Một smart contract cụ thể
+│   │   ├── Cargo.toml  # Định nghĩa dependencies cho contract
+│   │   ├── src/       # Chứa code của contract
+│   │   │   ├── contract.rs  # Xử lý logic chính
+│   │   │   ├── lib.rs       # Điểm vào chính của contract
+│   │   │   ├── msg.rs       # Định nghĩa message (instantiate, execute, query)
+│   │   │   ├── state.rs     # Lưu trữ dữ liệu contract
+│   │   │   ├── error.rs     # Định nghĩa lỗi (tùy chọn)
+│   │   ├── schema/    # (Tùy chọn) Chứa schema JSON cho contract
+│   │   ├── tests/     # (Tùy chọn) Test contract bằng Rust
+├── scripts/           # Chứa script deploy, interact với contract
+├── tests/             # (Tùy chọn) Test tổng hợp cho tất cả contracts
+├── examples/          # (Tùy chọn) Chứa mẫu sử dụng contract
+└── artifacts/         # Chứa file .wasm đã build và tối ưu
 
+```
 
