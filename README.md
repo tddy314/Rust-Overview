@@ -259,4 +259,19 @@ docker run --rm -v "D:/desktop/Security_Research/Cosmos/Rust Learning/rustlings/
   cosmwasm/rust-optimizer:0.16.0
 
 ```
+cac function and object
+```
+Hàm	Chức năng
+Secp256k1HdWallet.fromMnemonic(mnemonic, options?)	Tạo ví từ mnemonic
+setupWebKeplr()	Kết nối với Keplr Wallet (nếu có)
+coin(amount, denom)	Tạo một đối tượng token (Coin)
+toBinary(obj)	Chuyển JSON thành nhị phân
+```
 
+```
+Đối tượng	Chức năng
+SigningCosmWasmClient	Client để gửi giao dịch có chữ ký
+CosmWasmClient	Client để chỉ đọc dữ liệu từ blockchain
+UploadResult	Kết quả upload contract
+InstantiateResult	Kết quả khởi tạo contract
+```
