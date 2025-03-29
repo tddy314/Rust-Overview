@@ -275,3 +275,9 @@ CosmWasmClient	Client để chỉ đọc dữ liệu từ blockchain
 UploadResult	Kết quả upload contract
 InstantiateResult	Kết quả khởi tạo contract
 ```
+
+
+
+✅ dyn dùng để tạo trait object cho phép dynamic dispatch.
+✅ dyn Iterator giúp Rust xử lý iterator có kích thước không cố định tại compile time.
+✅ Dùng Box<dyn Iterator> để tối ưu bộ nhớ và tránh copy dữ liệu lớn trên stack.
