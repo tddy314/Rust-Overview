@@ -311,3 +311,38 @@ let y = &mut x;
 ```
 
 **=> lay reference chinh la lay con tro**
+```rust
+trait Speak {
+    fn speak(&self);
+}
+
+struct Dog;
+struct Cat;
+
+impl Speak for Dog {
+    fn speak(&self) {
+        println!("Woof!");
+    }
+}
+
+impl Speak for Cat {
+    fn speak(&self) {
+        println!("Meow!");
+    }
+}
+
+fn say_hello(animal: &dyn Speak) {
+    animal.speak();
+}
+
+fn main() {
+    let dog = Dog;
+    let cat = Cat;
+
+    say_hello(&dog); // Woof!
+    say_hello(&cat); // Meow!
+}
+```
+Ở đây, say_hello nhận vào tham chiếu đến dyn Speak, nên nó có thể chấp nhận bất kỳ kiểu nào 
+
+triển khai Speak — dù là Dog, Cat, hay các kiểu khác.
